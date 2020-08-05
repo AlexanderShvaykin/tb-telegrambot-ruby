@@ -1,31 +1,14 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require 'telegram/bot'
-require 'gemoji'
-require 'async'
-require 'encrypted_strings'
-require 'sanitize'
-require 'English'
-require 'open-uri'
-
-require './lib/app_configurator'
-require './lib/emoji'
-require './lib/emoji_aliaser'
-require './lib/formatter'
-require './lib/validator'
-require './lib/viewers/viewers'
-require './lib/message_responder'
-require './lib/message_sender'
-
 Process.setproctitle("tb_bot")
 File.open("./tmp/bot.pid", "w") do |f|
   f << Process.pid
 end
 
-config = AppConfigurator.new
-config.configure
+require './application'
 
+config = AppConfigurator.new
 token = config.load_token
 logger = config.load_logger
 
